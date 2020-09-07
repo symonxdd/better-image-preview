@@ -1,0 +1,21 @@
+{
+    "name": "Better Image View",
+    "version": "1.0.0",
+    "description": "Chrome extension for simple image preview customization.",
+    "manifest_version": 2,
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*/*jpg*",
+                "*://*/*png*",
+                "*://*/*gif*",
+                "*://*/*webp*",
+                "*://*/*svg*",
+                "*://*/*bmp*"
+            ],
+            "css": [
+                "main.css"
+            ]
+        }
+    ]
+}

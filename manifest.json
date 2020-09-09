@@ -1,27 +1,32 @@
 {
     "name": "Better Image Preview",
     "version": "1.0.0",
-    "description": "Chrome extension for simple image preview customization.",
+    "description": "Customize the image preview page.",
     "manifest_version": 2,
     "permissions": [
         "storage",
         "activeTab"
     ],
     "browser_action": {
-        "default_popup": "popup.html"
+        "default_popup": "html/popup.html"
+    },
+    "icons": {
+        "16": "img/better16.png",
+        "48": "img/better48.png",
+        "128": "img/better128.png"
     },
     "content_scripts": [
         {
             "matches": [
-                "*://*/*jpg*",
-                "*://*/*png*",
-                "*://*/*gif*",
-                "*://*/*webp*",
-                "*://*/*svg*",
-                "*://*/*bmp*"
+                "*://*/*.jpg",
+                "*://*/*.png",
+                "*://*/*.gif",
+                "*://*/*.webp",
+                "*://*/*.svg",
+                "*://*/*.bmp"
             ],
             "js": [
-                "content.js"
+                "js/content/content.js"
             ]
         }
     ]

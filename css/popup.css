@@ -4,12 +4,6 @@
     box-sizing: border-box;
 }
 
-#container {
-    display: table;
-    margin: 0 auto;
-    width: 5px;
-}
-
 #bar {
     background-image: linear-gradient(-225deg, #a445b2 0%, #d41872 52%, #ff0066 100%);
     font-weight: 500;
@@ -22,13 +16,14 @@
     padding: 2px;
 }
 
-section:hover {
-}
-
-#bgcolor {
-    background-color: transparent;
+input#bgcolor {
     width: 80px;
     height: 40px;
     border: none;
     outline: none;
+    appearance: none; /* remove dropdown arrow */
+}
+
+input#bgcolor::-webkit-color-swatch {
+    border-color: transparent; /* remove color input 'baked-in' border */
 }

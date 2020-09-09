@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', restoreOptions);
 document.getElementById('bgcolor').addEventListener('input', saveOptions);
 
-// Saves prefs to chrome.storage
+// Save prefs to chrome.storage
 function saveOptions() {
     let bgcolor = document.getElementById('bgcolor').value;
 
@@ -12,10 +12,13 @@ function saveOptions() {
         let status = document.getElementById('bar');
         status.textContent = 'saved';
         setTimeout(() => {
-            status.innerHTML = '<br>';
+            status.innerHTML = '&nbsp;';
         }, 750);
+
+        document.getElementById('bgcolor').style.backgroundColor = bgcolor;
     });
 
+    // live update (user must be viewing image, else page refresh needed)
     chrome.tabs.query({ currentWindow: true, active: true }, tabs => {
         const url = tabs[0].url;
         const extensions = ["jpg", "png", "gif", "webp", "svg", "bmp"];
@@ -35,5 +38,6 @@ function restoreOptions() {
         bgcolor: '#2C313A',
     }, items => {
         document.getElementById('bgcolor').value = items.bgcolor;
+        document.getElementById('bgcolor').style.backgroundColor = items.bgcolor;
     });
 }

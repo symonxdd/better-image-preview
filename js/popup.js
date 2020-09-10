@@ -21,7 +21,7 @@ function saveOptions() {
     // live update (user must be viewing image, else page refresh needed)
     chrome.tabs.query({ currentWindow: true, active: true }, tabs => {
         const url = tabs[0].url;
-        const extensions = ["jpg", "png", "gif", "webp", "svg", "bmp"];
+        const extensions = ["jpg", "jpeg", "png", "gif", "webp", "svg", "bmp"];
 
         const isImage = extensions.some(extension => url.includes(extension));
         if (isImage) {

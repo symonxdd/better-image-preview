@@ -1,12 +1,14 @@
+const bgcolor = document.getElementById('bgcolor');
+
 document.addEventListener('DOMContentLoaded', restoreOptions);
-document.getElementById('bgcolor').addEventListener('input', saveOptions);
+bgcolor.addEventListener('input', saveOptions);
 
 // Save prefs to chrome.storage
 function saveOptions() {
-    let bgcolor = document.getElementById('bgcolor').value;
+    let bgcolorValue = bgcolor.value;
 
     chrome.storage.local.set({
-        bgcolor: bgcolor
+        bgcolor: bgcolorValue
     }, () => {
         // Message on save
         let status = document.getElementById('bar');
@@ -15,19 +17,20 @@ function saveOptions() {
             status.innerHTML = '&nbsp;';
         }, 750);
 
-        document.getElementById('bgcolor').style.backgroundColor = bgcolor;
+        bgcolor.style.backgroundColor = bgcolorValue;
     });
 
     // live update (user must be viewing image, else page refresh needed)
-    chrome.tabs.query({ currentWindow: true, active: true }, tabs => {
-        const url = tabs[0].url;
+    chrome.tabs.query({ currentWindow: true }, tabs => {
+        console.log(tabs);
         const extensions = ["jpg", "jpeg", "png", "gif", "webp", "svg", "bmp"];
 
-        const isImage = extensions.some(extension => url.includes(extension));
-        if (isImage) {
-            const activeTab = tabs[0];
-            chrome.tabs.sendMessage(activeTab.id, { action: 'colorInputChanged', bgcolor: bgcolor });
-        }
+        tabs.forEach(tab => {
+            const isImage = extensions.some(extension => tab.url.includes(extension));
+            if (isImage) {
+                chrome.tabs.sendMessage(tab.id, { action: 'colorInputChanged', bgcolor: bgcolorValue });
+            }
+        });
     });
 }
 
@@ -37,7 +40,7 @@ function restoreOptions() {
     chrome.storage.local.get({
         bgcolor: '#2C313A',
     }, items => {
-        document.getElementById('bgcolor').value = items.bgcolor;
-        document.getElementById('bgcolor').style.backgroundColor = items.bgcolor;
+        bgcolor.value = items.bgcolor;
+        bgcolor.style.backgroundColor = items.bgcolor;
     });
 }

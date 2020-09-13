@@ -1,4 +1,4 @@
-const body = document.querySelector('body');
+const body = document.getElementsByTagName('body')[0];
 
 chrome.storage.local.get({
     bgcolor: '#2C313A',

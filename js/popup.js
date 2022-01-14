@@ -20,8 +20,9 @@ function saveOptions() {
         backgroundColorPicker.style.backgroundColor = bgcolorValue;
     });
 
-    // live update
+    // Live updates on opened tabs
     chrome.tabs.query({ currentWindow: true }, tabs => {
+        console.log("gg");
         console.log(tabs);
         const extensions = ["jpg", "jpeg", "png", "gif", "webp", "svg", "bmp"];
 

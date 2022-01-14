@@ -18,20 +18,7 @@
     "content_scripts": [
         {
             "matches": [
-                "*://*/*.jpg*",
-                "*://*/*.jpeg*",
-                "*://*/*.png*",
-                "*://*/*.gif*",
-                "*://*/*.webp*",
-                "*://*/*.svg*",
-                "*://*/*.bmp*",
-                "file:///*/*.jpg*",
-                "file:///*/*.jpeg*",
-                "file:///*/*.png*",
-                "file:///*/*.gif*",
-                "file:///*/*.webp*",
-                "file:///*/*.svg*",
-                "file:///*/*.bmp*"
+                "<all_urls>"               
             ],
             "js": [
                 "js/content/content.js"
